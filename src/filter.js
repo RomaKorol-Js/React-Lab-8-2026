@@ -15,7 +15,7 @@
  * @param {FilterOptions} [options]
  * @returns {Show[]}
  */
-export function filterShows(shows, options) {
+export function filterShows(shows, options = {}) {
   let FinalResult = [...shows];
 
   if (options.query) {
@@ -28,7 +28,7 @@ export function filterShows(shows, options) {
       show.genres.includes(options.genre),
     );
   }
-  if (options.minRating != undefined) {
+  if (typeof options.minRating === "number" && options.minRating > 0) {
     FinalResult = FinalResult.filter(
       (show) => show.rating >= options.minRating,
     );

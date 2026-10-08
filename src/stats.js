@@ -22,12 +22,14 @@ export function genreStats(shows) {
         statsCollector[genre] = {
           count: 0,
           averageRating: 0,
+          ratingsCount: 0,
         };
       }
       statsCollector[genre].count += 1;
 
       if (typeof show.rating === "number") {
         statsCollector[genre].averageRating += show.rating;
+        statsCollector[genre].ratingsCount += 1; // ДОДАНО
       }
     }
   });
@@ -40,7 +42,9 @@ export function genreStats(shows) {
     finalResult[genre] = {
       count: stats.count,
       averageRating:
-        Math.round((stats.averageRating / stats.count) * 100) / 100,
+        stats.ratingsCount > 0
+          ? Math.round((stats.averageRating / stats.ratingsCount) * 10) / 10
+          : null,
     };
   }
   return finalResult;
