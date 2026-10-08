@@ -16,5 +16,24 @@
  * @returns {Show[]}
  */
 export function filterShows(shows, options) {
-  throw new Error('Not implemented');
+  let FinalResult = [...shows];
+  console.log(options);
+
+  if (options.query) {
+    FinalResult = FinalResult.filter((show) =>
+      show.name.toLowerCase().includes(options.query.trim().toLowerCase()),
+    );
+  }
+  if (options.genre) {
+    FinalResult = FinalResult.filter((show) =>
+      show.genres.includes(options.genre),
+    );
+  }
+  if (options.minRating != undefined) {
+    FinalResult = FinalResult.filter(
+      (show) => show.rating >= options.minRating,
+    );
+  }
+
+  return FinalResult;
 }
