@@ -9,6 +9,19 @@
  * @param {'asc' | 'desc'} [direction]
  * @returns {Show[]}
  */
-export function sortShows(shows, key, direction = 'asc') {
-  throw new Error('Not implemented');
+export function sortShows(shows, key, direction = "asc") {
+  let finalResult = [...shows].sort((firstargument, secondargument) => {
+    if (firstargument[key] === null && secondargument[key] === null) return 0;
+    if (firstargument[key] === null) return 1;
+    if (secondargument[key] === null) return -1;
+
+    let result;
+    if (key === "name") {
+      result = firstargument[key].localeCompare(secondargument[key]);
+    } else {
+      result = firstargument[key] - secondargument[key];
+    }
+    return direction === "desc" ? -result : result;
+  });
+  return finalResult;
 }
