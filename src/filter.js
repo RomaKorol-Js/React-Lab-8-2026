@@ -17,7 +17,6 @@
  */
 export function filterShows(shows, options) {
   let FinalResult = [...shows];
-  console.log(options);
 
   if (options.query) {
     FinalResult = FinalResult.filter((show) =>
